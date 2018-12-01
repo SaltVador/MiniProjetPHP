@@ -14,10 +14,6 @@ class ControleurAffiche
 	}
 
 	function affiche(){
-		if ($_SESSION["villes"] == null) {
- 			$_SESSION["villes"] = new Villes();
- 		}
-
 		$this->maVue->jeu();
 	}
 }
