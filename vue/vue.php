@@ -16,7 +16,7 @@
  		<head>
  			<meta charset="UTF-8">
  			<meta content="html/text">
- 			<link rel="stylesheet" type="text/css" href="source/page.css" media="all"/>
+ 			<link rel="stylesheet" type="text/css" href="vue.css" media="all"/>
  		</head>
  		<body>
  		
