@@ -2,6 +2,7 @@
 
 require_once PATH_MODELE."/modele.php";
 require_once PATH_CONTROLEUR."/controleurAffiche.php";
+require_once PATH_CONTROLEUR."/ControleurAuthentification.php";
 
 
 class Routeur {
@@ -12,11 +13,12 @@ class Routeur {
 	public function __construct(){
 		$this->modele = new Modele();
 		$this->ctrlAffiche = new controleurAffiche();
+		$this->ctrlAuth = new ControleurAuthentification();
 		
 	}
 
 	public function routeurRequete()
 	{
-		$this->ctrlAffiche->affiche();
+		$this->ctrlAuth->vueauth();
 	}
 }
