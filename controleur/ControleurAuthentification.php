@@ -9,10 +9,24 @@ class ControleurAuthentification
     {
 
         $this->maVue = new Vue();
+        $this->bd = new Modele();
 
     }
 
     function vueauth(){
         $this->maVue->demandePseudo();
-}
+    }
+
+    function enregistrement(){
+
+    }
+
+    function verifCo(){
+        if ($this->bd->exists()){
+            $this->maVue->jeu();
+        } else {
+            $_POST["coFail"] = true;
+            $this->maVue->demandePseudo();
+        }
+    }
 }

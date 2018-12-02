@@ -19,6 +19,14 @@ class Routeur {
 
 	public function routeurRequete()
 	{
-		$this->ctrlAuth->vueauth();
+	    if (isset($_POST["choixAuth"])){
+	        if ($_POST["choixAuth"] == "Enregistrement"){
+	            $this->ctrlAuth->enregistrement();
+            } else {
+                $this->ctrlAuth->verifCo();
+            }
+        } else {
+            $this->ctrlAuth->vueauth();
+        }
 	}
 }

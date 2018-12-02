@@ -54,6 +54,29 @@ public function deconnexion(){
    $this->connexion=null;
 }
 
+    public function exists(){
+        try{
+            $statement = $this->connexion->prepare("select pseudo from joueurs where pseudo=? and motDePasse=?;");
+            $statement->bindParam(1, $pseudoParam);
+            $statement->bindParam(2, $mdpParam);
+            $pseudoParam=$_POST["pseudo"];
+            $mdpParam=$_POST["mdp"];
+            $statement->execute();
+            $result=$statement->fetch(PDO::FETCH_ASSOC);
+
+            if ($result["pseudo"]!=NUll){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(PDOException $e){
+            $this->deconnexion();
+            throw new TableAccesException("problème avec la table joueurs");
+        }
+    }
+
 }
 
 ?>

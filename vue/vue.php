@@ -40,7 +40,14 @@
         </head>
         <body>
 
-        <form action="../index.php" method="post">
+        <?php
+        if (isset($_POST["coFail"]) && $_POST["coFail"] == true){
+            echo "<p>Le pseudo et le mot de passe ne correspondent pas</p>";
+            echo "<br>";
+        }
+        ?>
+
+        <form action="index.php" method="post">
             Pseudo :<br>
             <input type="text" name="pseudo">
             <br>
