@@ -63,7 +63,11 @@
             <input type="text" name="mdp">
             <br>
             <br>
-            <input type="radio" name="choixAuth" value="Connexion" checked="checked">Connexion<input type="radio" name="choixAuth" value="Enregistrement">Enregistrement<br>
+            <input type="radio" name="choixAuth" value="Connexion" checked="checked" id="CO"><label for="CO">Connexion</label>
+            <br>
+            <input type="radio" name="choixAuth" value="Enregistrement" id="EN"><label for="EN">Enregistremet</label>
+            <br>
+            <br>
             <input type="submit">
         </form>
 
