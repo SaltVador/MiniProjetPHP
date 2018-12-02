@@ -18,7 +18,8 @@ class ControleurAuthentification
     }
 
     function enregistrement(){
-
+        $this->bd->enregistreBD();
+        $this->maVue->demandePseudo();
     }
 
     function verifCo(){

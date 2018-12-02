@@ -45,6 +45,13 @@
             echo "<p>Le pseudo et le mot de passe ne correspondent pas</p>";
             echo "<br>";
         }
+        if (isset($_POST["enreOK"]) && $_POST["enreOK"] == true){
+            echo "<p>Vous avez bien été enregistré</p>";
+            echo "<br>";
+        }if (isset($_POST["enreOK"]) && $_POST["enreOK"] == false){
+            echo "<p>Ce pseudo est déjà utilisé</p>";
+            echo "<br>";
+        }
         ?>
 
         <form action="index.php" method="post">

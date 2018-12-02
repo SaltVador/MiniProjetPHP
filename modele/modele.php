@@ -60,7 +60,7 @@ public function deconnexion(){
             $statement->bindParam(1, $pseudoParam);
             $statement->bindParam(2, $mdpParam);
             $pseudoParam=$_POST["pseudo"];
-            $mdpParam=$_POST["mdp"];
+            $mdpParam=crypt($_POST["mdp"],"SaltVador");
             $statement->execute();
             $result=$statement->fetch(PDO::FETCH_ASSOC);
 
@@ -72,8 +72,21 @@ public function deconnexion(){
             }
         }
         catch(PDOException $e){
-            $this->deconnexion();
-            throw new TableAccesException("problème avec la table joueurs");
+        }
+    }
+
+    public function enregistreBD(){
+        try{
+            $statement = $this->connexion->prepare("insert into joueurs values (?,?)");
+            $statement->bindParam(1, $pseudoParam);
+            $statement->bindParam(2, $mdpParam);
+            $pseudoParam=$_POST["pseudo"];
+            $mdpParam=crypt($_POST["mdp"],"SaltVador");
+            $statement->execute();
+            $_POST["enreOK"]=true;
+        }
+        catch(PDOException $e){
+            $_POST["enreOK"]=false;
         }
     }
 
