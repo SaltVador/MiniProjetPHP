@@ -1,6 +1,6 @@
 <?php
 
 
-class controleurVilles
+class ControleurVilles
 {
 }
