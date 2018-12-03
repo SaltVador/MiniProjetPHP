@@ -21,7 +21,11 @@
  		<body>
  		
  			<div class="grid">
-            Moi
+            <form action="index.php" method="post">
+
+
+                <input type="submit" value="Home">
+            </form>
  			</div>
 
  		</body>
@@ -60,7 +64,7 @@
             <br>
             <br>
             Mot de passe :<br>
-            <input type="text" name="mdp">
+            <input type="password" name="mdp">
             <br>
             <br>
             <input type="radio" name="choixAuth" value="Connexion" checked="checked" id="CO"><label for="CO">Connexion</label>
@@ -74,5 +78,17 @@
         </body>
         </html>
         <?php
+    }
+
+    function bienvenue(){
+ 	    ?>
+        <html>
+        Bienvenue <?php echo $_POST["pseudo"];?>
+        <br>
+        <form action="index.php">
+            <input type="submit" value="OK">
+        </form>
+        </html>
+<?php
     }
  }

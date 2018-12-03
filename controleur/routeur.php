@@ -23,10 +23,16 @@ class Routeur {
 	        if ($_POST["choixAuth"] == "Enregistrement"){
 	            $this->ctrlAuth->enregistrement();
             } else {
-                $this->ctrlAuth->verifCo();
+
+	            $this->ctrlAuth->verifCo();
+
             }
         } else {
-            $this->ctrlAuth->vueauth();
+	        if (isset($_SESSION["login"])){
+                $this->ctrlAffiche->affiche();
+            } else{
+                $this->ctrlAuth->vueauth();
+            }
         }
 	}
 }
