@@ -28,6 +28,7 @@ class TableAccesException extends MonException{
 
 class Modele{
 private $connexion;
+private $villes;
 
 // Constructeur de la classe
 
@@ -38,6 +39,8 @@ private $connexion;
     $chaine="mysql:host=".HOST.";dbname=".BD;
     $this->connexion = new PDO($chaine,LOGIN,PASSWORD);
     $this->connexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+    $this->villes = new Villes();
      }
     catch(PDOException $e){
       $exception=new ConnexionException("problème de connexion à la base");
@@ -90,6 +93,51 @@ public function deconnexion(){
         }
     }
 
+    function creerVilles(){
+      try{
+          for($i = 0; $i<7; $i++) {
+              for ($j = 0; $j < 7; $j++) {
+                  if ($this->villes->existe($i,$j)) {
+                      for ($x = 0; $x < 7; $x++) {
+                          if ($x != $j && $this->villes->existe($i,$x)) {
+
+                              $statement = $this->connexion->prepare("insert into lienvilles values (?,?,?,0);");
+                              $statement->bindParam(1, $_SESSION["login"]);
+                              $ville1 = "".$i.$j;
+                              $statement->bindParam(2, $ville1);
+                              $ville2 = "".$i.$x;
+
+                              $statement->bindParam(3, $ville2);
+                              $statement->execute();
+
+                          }
+                      }
+                      for ($y = 0; $y < 7; $y++) {
+                          if ($y != $i && $this->villes->existe($y,$j)) {
+
+                              $statement = $this->connexion->prepare("insert into lienvilles values (?,?,?,0);");
+                              $statement->bindParam(1, $_SESSION["login"]);
+                              $ville1 ="".$i.$j;
+                              $statement->bindParam(2, $ville1);
+                              $ville2 ="".$y.$j;
+                              $statement->bindParam(3, $ville2);
+                              $statement->execute();
+
+                          }
+                      }
+                  }
+              }
+          }
+      }
+
+
+      catch (PDOException $e){
+        throw new TableAccesException("ta mere");
+      }
+    }
+
+
 }
 
 ?>
+

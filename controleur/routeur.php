@@ -3,17 +3,22 @@
 require_once PATH_MODELE."/modele.php";
 require_once PATH_CONTROLEUR."/controleurAffiche.php";
 require_once PATH_CONTROLEUR."/ControleurAuthentification.php";
+require_once PATH_CONTROLEUR."/ControleurVilles.php";
 
 
 class Routeur {
 	private $modele;
 	private $ctrlAffiche;
+	private $ctrlAuth;
+	private $ctrlVilles;
 	
 
 	public function __construct(){
 		$this->modele = new Modele();
 		$this->ctrlAffiche = new controleurAffiche();
 		$this->ctrlAuth = new ControleurAuthentification();
+		$this->ctrlVilles = new ControleurVilles();
+
 		
 	}
 
@@ -29,6 +34,9 @@ class Routeur {
             }
         } else {
 	        if (isset($_SESSION["login"])){
+	            if (!isset($_SESSION["villesFonde"])){
+                    $this->ctrlVilles->init();
+                }
                 $this->ctrlAffiche->affiche();
             } else{
                 $this->ctrlAuth->vueauth();
