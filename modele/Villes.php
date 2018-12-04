@@ -45,7 +45,9 @@ return isset($this->villes[$i][$j]);
 
 //rajout d'éventuelles méthodes
 
+function villeById($id){
 
+}
 
 
 }

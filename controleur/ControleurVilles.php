@@ -14,8 +14,6 @@ class ControleurVilles
     }
 
     function init(){
-        $this->modele->creerVilles();
-        $_SESSION["villesFonde"] = true;
     }
 
 }

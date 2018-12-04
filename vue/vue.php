@@ -1,13 +1,12 @@
 <?php
 
-//require_once PATH_MODELE."/Villes.php";
  
  class Vue
  {
 
 
  	
- 	function jeu()
+ 	function jeu($villes)
  	{	
 
  		
@@ -21,11 +20,36 @@
  		<body>
  		
  			<div class="grid">
-            <form action="index.php" method="post">
+                <table>
 
-
-                <input type="submit" value="Home">
-            </form>
+                <?php
+                #$_POST["villes"] += $_POST["ville"];
+                for ($i=0;$i<7;$i++){
+                    echo "<tr>";
+                    for ($j=0;$j<7;$j++){
+                        if ($villes->existe($i,$j)){
+                            ?>
+                                <td>
+                                <form action="index.php" method="post">
+                                    <input type="text" hidden name="ville" value="<?php echo $i."/".$j;?>">
+                                    <input type="submit" value="<?php echo $villes->getVille($i,$j)->getNombrePontsMax();?>" class="bout" style="width: 40px; height: 40px;">
+                                </form>
+                                </td>
+                            <?php
+                        } else {
+                            ?>
+                                <td>
+                                <form action="index.php" method="post">
+                                <input type="submit" value="" disabled class="bout" style="width: 40px; height: 40px;">
+                                </form>
+                                </td>
+                            <?php
+                        }
+                    }
+                    echo "</tr>";
+                }
+                ?>
+                </table>
  			</div>
 
  		</body>

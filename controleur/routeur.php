@@ -34,9 +34,8 @@ class Routeur {
             }
         } else {
 	        if (isset($_SESSION["login"])){
-	            if (!isset($_SESSION["villesFonde"])){
-                    $this->ctrlVilles->init();
-                }
+
+	            $this->ctrlVilles->init();
                 $this->ctrlAffiche->affiche();
             } else{
                 $this->ctrlAuth->vueauth();
