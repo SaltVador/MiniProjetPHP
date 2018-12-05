@@ -18,7 +18,21 @@
  			<link rel="stylesheet" type="text/css" href="vue.css" media="all"/>
  		</head>
  		<body>
- 		
+
+        <?php
+
+        if (!isset($_POST["lien"])){
+            $_POST["lien"] = "";
+        }
+
+        if (isset($_POST["ville"])){
+            $_POST["ville"] = "ville[]=".$_POST["ville"];
+            echo $_POST["ville"];
+            $_POST["lien"] = $_POST["lien"].$_POST["ville"]."&";
+            echo "<br>".$_POST["lien"];
+        }
+
+        ?>
  			<div class="grid">
                 <table>
 
@@ -27,12 +41,19 @@
                 for ($i=0;$i<7;$i++){
                     echo "<tr>";
                     for ($j=0;$j<7;$j++){
-                        if ($villes->existe($i,$j)){
+                        if ($villes->existe($j,$i)){
                             ?>
                                 <td>
                                 <form action="index.php" method="post">
-                                    <input type="text" hidden name="ville" value="<?php echo $i."/".$j;?>">
-                                    <input type="submit" value="<?php echo $villes->getVille($i,$j)->getNombrePontsMax();?>" class="bout" style="width: 40px; height: 40px;">
+                                    <?php
+
+                                    if (!isset($_POST["lien"])){
+                                    $_POST["lien"] = "";
+                                    }
+                                    ?>
+                                    <input type="text" hidden name="lien" value="<?php echo $_POST["lien"];?>">
+                                    <input type="text" hidden name="ville" value="<?php echo $j."/".$i;?>">
+                                    <input type="submit" value="<?php echo $villes->getVille($j,$i)->getNombrePonts()."/".$villes->getVille($j,$i)->getNombrePontsMax();?>" style="width: 40px; height: 40px;">
                                 </form>
                                 </td>
                             <?php
@@ -40,7 +61,7 @@
                             ?>
                                 <td>
                                 <form action="index.php" method="post">
-                                <input type="submit" value="" disabled class="bout" style="width: 40px; height: 40px;">
+                                <input type="submit" value="" disabled style="width: 40px; height: 40px;">
                                 </form>
                                 </td>
                             <?php
