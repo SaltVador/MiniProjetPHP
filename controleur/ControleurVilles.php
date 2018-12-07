@@ -20,6 +20,13 @@ class ControleurVilles
             for ($i=1;$i<=count($lien['ville'])-1;$i+=2){
                 $ville1=$lien['ville'][$i-1];
                 $ville2=$lien['ville'][$i];
+                $ville1b = explode("/",$ville1);
+                $ville1i = $ville1b[0];
+                $ville1j=$ville1b[1];
+                $ville2b = explode("/",$ville2);
+                $ville2i = $ville2b[0];
+                $ville2j=$ville2b[1];
+
             }
         }
     }
