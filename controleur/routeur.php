@@ -36,7 +36,6 @@ class Routeur {
 	        if (isset($_SESSION["login"])){
 
 	            $this->ctrlVilles->init();
-                $this->ctrlAffiche->affiche();
             } else{
                 $this->ctrlAuth->vueauth();
             }

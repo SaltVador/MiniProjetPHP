@@ -40,5 +40,8 @@ $this->nombrePonts=$nb;
 }
 
 //il faut ici implémenter les méthodes qui permettent de lier des villes entre elles, ...
-
+function addBridge($ville){
+    $this->villesLiees[$this->nombrePonts]=$ville;
+    $this->nombrePonts +=1;
+}
 }

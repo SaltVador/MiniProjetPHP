@@ -19,20 +19,7 @@
  		</head>
  		<body>
 
-        <?php
 
-        if (!isset($_POST["lien"])){
-            $_POST["lien"] = "";
-        }
-
-        if (isset($_POST["ville"])){
-            $_POST["ville"] = "ville[]=".$_POST["ville"];
-            echo $_POST["ville"];
-            $_POST["lien"] = $_POST["lien"].$_POST["ville"]."&";
-            echo "<br>".$_POST["lien"];
-        }
-
-        ?>
  			<div class="grid">
                 <table>
 
