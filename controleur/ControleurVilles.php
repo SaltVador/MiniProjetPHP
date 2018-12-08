@@ -20,31 +20,39 @@ class ControleurVilles
 
     function init(){
 
-
+        for ($i=0;$i<7;$i++){
+            for ($j=0;$j<7;$j++){
+                $ponts[$i][$j]="";
+            }
+        }
         if (!isset($_POST["lien"])){
             $_POST["lien"] = "";
         }
 
         if (isset($_POST["ville"])){
             $_POST["ville"] = "ville[]=".$_POST["ville"];
-            echo $_POST["ville"];
             $_POST["lien"] = $_POST["lien"].$_POST["ville"]."&";
-            echo "<br>".$_POST["lien"];
+            echo $_POST["lien"]."<br>";
         }
 
 
         if (!isset($_POST["lien"]))$_POST["lien"]="";
         parse_str($_POST["lien"],$lien);
         if (isset($lien['ville'])){
-            for ($i=1;$i<=count($lien['ville'])-1;$i+=2){
+
+            for ($i=1;$i<count($lien['ville']);$i=$i+2){
+                var_dump($i);
                 $ville1=$lien['ville'][$i-1];
+                var_dump($ville1);
                 $ville2=$lien['ville'][$i];
+                var_dump($ville2);
                 $ville1b = explode("/",$ville1);
                 $ville1i = $ville1b[0];
-                $ville1j=$ville1b[1];
+                $ville1j = $ville1b[1];
                 $ville2b = explode("/",$ville2);
                 $ville2i = $ville2b[0];
                 $ville2j = $ville2b[1];
+                var_dump($ville2j);
                 if (($ville1i==$ville2i||$ville1j==$ville2j)&&$ville1!=$ville2){
                     $ville1 = $this->villes->getVille($ville1i,$ville1j);
                     $ville2 = $this->villes->getVille($ville2i,$ville2j);
@@ -52,14 +60,57 @@ class ControleurVilles
                         if ($this->noCollision($ville1i,$ville1j,$ville2i,$ville2j)){
                             $this->villes->getVille($ville2i,$ville2j)->addBridge($ville1);
                             $this->villes->getVille($ville1i,$ville1j)->addBridge($ville2);
+                            $pont = $this->villes->getVille($ville1i,$ville1j)->getNombrePVille($this->villes->getVille($ville2i,$ville2j));
+                            if ($ville2i==$ville1i){
+                                if ($ville1j>$ville2j){
+                                    for ($i = $ville2j+1;$i<$ville1j;$i++){
+                                        if ($pont == 1){
+                                            $ponts[$i][$ville1i] = "-";
+                                        }
+                                        if ($pont == 2){
+                                            $ponts[$i][$ville1i] = "=";
+                                        }
+                                    }
+                                }else{
+                                    for ($i = $ville1j+1;$i<$ville2j;$i++){
+                                        if ($pont == 1){
+                                            $ponts[$i][$ville1i] = "-";
+                                        }
+                                        if ($pont == 2){
+                                            $ponts[$i][$ville1i] = "=";
+                                        }
+                                    }
+                                }
+                            } else{
+                                if ($ville1i>$ville2i){
+                                    for ($i = $ville2i+1;$i<$ville1i;$i++){
+                                        if ($pont == 1){
+                                            $ponts[$ville1j][$i] = "|";
+                                        }
+                                        if ($pont == 2){
+                                            $ponts[$ville1j][$i] = "||";
+                                        }
+                                    }
+                                }else{
+                                    for ($i = $ville1i+1;$i<$ville2i;$i++){
+                                        if ($pont == 1){
+                                            $ponts[$ville1j][$i] = "|";
+                                        }
+                                        if ($pont == 2){
+                                            $ponts[$ville1j][$i] = "||";
+                                        }
+                                    }
+                                }
+                            }
+
                         }else $this->rollback();
                     }else $this->rollback();
                 } else $this->rollback();
 
             }
-            echo "<br>".$_POST["lien"];
         }
-        $this->maVue->jeu($this->villes);
+        echo "<br>".$_POST["lien"]."<br>";
+        $this->maVue->jeu($this->villes, $ponts);
     }
 
     function rollback(){
@@ -99,5 +150,6 @@ class ControleurVilles
         }
         return $verif;
     }
+
 
 }

@@ -6,7 +6,7 @@
 
 
  	
- 	function jeu($villes)
+ 	function jeu($villes,$ponts)
  	{	
 
  		
@@ -28,7 +28,7 @@
                 for ($i=0;$i<7;$i++){
                     echo "<tr>";
                     for ($j=0;$j<7;$j++){
-                        if ($villes->existe($j,$i)){
+                        if ($villes->existe($i,$j)){
                             ?>
                                 <td>
                                 <form action="index.php" method="post">
@@ -39,8 +39,8 @@
                                     }
                                     ?>
                                     <input type="text" hidden name="lien" value="<?php echo $_POST["lien"];?>">
-                                    <input type="text" hidden name="ville" value="<?php echo $j."/".$i;?>">
-                                    <input type="submit" value="<?php echo $villes->getVille($j,$i)->getNombrePonts()."/".$villes->getVille($j,$i)->getNombrePontsMax();?>" style="width: 40px; height: 40px;">
+                                    <input type="text" hidden name="ville" value="<?php echo $i."/".$j;?>">
+                                    <input type="submit" value="<?php echo $villes->getVille($i,$j)->getNombrePonts()."/".$villes->getVille($i,$j)->getNombrePontsMax();?>" style="width: 40px; height: 40px;">
                                 </form>
                                 </td>
                             <?php
@@ -48,7 +48,7 @@
                             ?>
                                 <td>
                                 <form action="index.php" method="post">
-                                <input type="submit" value="" disabled style="width: 40px; height: 40px;">
+                                <input type="submit" value="<?php echo $ponts[$j][$i]?>" disabled style="width: 40px; height: 40px;">
                                 </form>
                                 </td>
                             <?php
