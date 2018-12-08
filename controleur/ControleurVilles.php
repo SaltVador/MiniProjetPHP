@@ -46,13 +46,22 @@ class ControleurVilles
                 $ville2i = $ville2b[0];
                 $ville2j = $ville2b[1];
                 if (($ville1i==$ville2i||$ville1j==$ville2j)&&$ville1!=$ville2){
-                    $this->villes->getVille($ville1i,$ville1j)->addBridge($this->villes->getVille($ville2i,$ville2j));
-                    $this->villes->getVille($ville2i,$ville2j)->addBridge($this->villes->getVille($ville1i,$ville1j));
-                }
+                    $ville1 = $this->villes->getVille($ville1i,$ville1j);
+                    $ville2 = $this->villes->getVille($ville2i,$ville2j);
+                    if ($ville1->getNombrePonts()<$ville1->getNombrePontsMax()&&$ville2->getNombrePonts()<$ville2->getNombrePontsMax()) {
+                        $this->villes->getVille($ville2i,$ville2j)->addBridge($ville1);
+                        $this->villes->getVille($ville1i,$ville1j)->addBridge($ville2);
+                    }else $this->rollback();
+                } else $this->rollback();
 
             }
+            echo "<br>".$_POST["lien"];
         }
         $this->maVue->jeu($this->villes);
+    }
+
+    function rollback(){
+        $_POST["lien"] = substr($_POST["lien"],0,strlen($_POST["lien"])-24);
     }
 
 }
