@@ -40,11 +40,11 @@ class ControleurVilles
         parse_str($_POST["lien"],$lien);
         if (isset($lien['ville'])){
 
-            for ($i=1;$i<count($lien['ville']);$i=$i+2){
-                var_dump($i);
-                $ville1=$lien['ville'][$i-1];
+            for ($e=1;$e<count($lien['ville']);$e=$e+2){
+                var_dump($e);
+                $ville1=$lien['ville'][$e-1];
                 var_dump($ville1);
-                $ville2=$lien['ville'][$i];
+                $ville2=$lien['ville'][$e];
                 var_dump($ville2);
                 $ville1b = explode("/",$ville1);
                 $ville1i = $ville1b[0];
