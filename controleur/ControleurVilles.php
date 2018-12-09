@@ -51,57 +51,73 @@ class ControleurVilles
                 if (($ville1i==$ville2i||$ville1j==$ville2j)&&$ville1!=$ville2){
                     $ville1 = $this->villes->getVille($ville1i,$ville1j);
                     $ville2 = $this->villes->getVille($ville2i,$ville2j);
-                    if ($ville1->getNombrePonts()<$ville1->getNombrePontsMax()&&$ville2->getNombrePonts()<$ville2->getNombrePontsMax()) {
+                    $pont = $this->villes->getVille($ville1i,$ville1j)->getNombrePVille($this->villes->getVille($ville2i,$ville2j));
+                    var_dump($pont);
+                    if ($pont<2) {
                         if ($this->noCollision($ville1i,$ville1j,$ville2i,$ville2j)){
                             $this->villes->getVille($ville2i,$ville2j)->addBridge($ville1);
                             $this->villes->getVille($ville1i,$ville1j)->addBridge($ville2);
-                            $pont = $this->villes->getVille($ville1i,$ville1j)->getNombrePVille($this->villes->getVille($ville2i,$ville2j));
-                            if ($ville2i==$ville1i){
-                                if ($ville1j>$ville2j){
-                                    for ($i = $ville2j+1;$i<$ville1j;$i++){
-                                        if ($pont == 1){
-                                            $ponts[$i][$ville1i] = "-";
-                                        }
-                                        if ($pont == 2){
-                                            $ponts[$i][$ville1i] = "=";
-                                        }
-                                    }
-                                }else{
-                                    for ($i = $ville1j+1;$i<$ville2j;$i++){
-                                        if ($pont == 1){
-                                            $ponts[$i][$ville1i] = "-";
-                                        }
-                                        if ($pont == 2){
-                                            $ponts[$i][$ville1i] = "=";
-                                        }
-                                    }
+                        }else $this->rollback();
+                    }else {
+                        $this->villes->getVille($ville2i,$ville2j)->delBridge($ville1);
+                        $this->villes->getVille($ville1i,$ville1j)->delBridge($ville2);
+                    }
+                    $pont = $this->villes->getVille($ville1i,$ville1j)->getNombrePVille($this->villes->getVille($ville2i,$ville2j));
+                    var_dump($pont);
+                    if ($ville2i==$ville1i){
+                        if ($ville1j>$ville2j){
+                            for ($i = $ville2j+1;$i<$ville1j;$i++){
+                                if ($pont == 0){
+                                    $ponts[$i][$ville1i] = "";
                                 }
-                            } else{
-                                if ($ville1i>$ville2i){
-                                    for ($i = $ville2i+1;$i<$ville1i;$i++){
-                                        if ($pont == 1){
-                                            $ponts[$ville1j][$i] = "|";
-                                        }
-                                        if ($pont == 2){
-                                            $ponts[$ville1j][$i] = "||";
-                                        }
-                                    }
-                                }else{
-                                    for ($i = $ville1i+1;$i<$ville2i;$i++){
-                                        if ($pont == 1){
-                                            $ponts[$ville1j][$i] = "|";
-                                        }
-                                        if ($pont == 2){
-                                            $ponts[$ville1j][$i] = "||";
-                                        }
-                                    }
+                                if ($pont == 1){
+                                    $ponts[$i][$ville1i] = "-";
+                                }
+                                if ($pont == 2){
+                                    $ponts[$i][$ville1i] = "=";
                                 }
                             }
-
-                        }else $this->rollback();
-                    }else $this->rollback();
+                        }else{
+                            for ($i = $ville1j+1;$i<$ville2j;$i++){
+                                if ($pont == 0){
+                                    $ponts[$i][$ville1i] = "";
+                                }
+                                if ($pont == 1){
+                                    $ponts[$i][$ville1i] = "-";
+                                }
+                                if ($pont == 2){
+                                    $ponts[$i][$ville1i] = "=";
+                                }
+                            }
+                        }
+                    } else{
+                        if ($ville1i>$ville2i){
+                            for ($i = $ville2i+1;$i<$ville1i;$i++){
+                                if ($pont == 0){
+                                    $ponts[$ville1j][$i] = "";
+                                }
+                                if ($pont == 1){
+                                    $ponts[$ville1j][$i] = "|";
+                                }
+                                if ($pont == 2){
+                                    $ponts[$ville1j][$i] = "||";
+                                }
+                            }
+                        }else{
+                            for ($i = $ville1i+1;$i<$ville2i;$i++){
+                                if ($pont == 0){
+                                    $ponts[$ville1j][$i] = "";
+                                }
+                                if ($pont == 1){
+                                    $ponts[$ville1j][$i] = "|";
+                                }
+                                if ($pont == 2){
+                                    $ponts[$ville1j][$i] = "||";
+                                }
+                            }
+                        }
+                    }
                 } else $this->rollback();
-
             }
         }
         $resultat[0] = $this->villes;

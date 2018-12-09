@@ -24,7 +24,6 @@
                 <table>
 
                 <?php
-                #$_POST["villes"] += $_POST["ville"];
                 for ($i=0;$i<7;$i++){
                     echo "<tr>";
                     for ($j=0;$j<7;$j++){
@@ -40,7 +39,7 @@
                                     ?>
                                     <input type="text" hidden name="lien" value="<?php echo $_POST["lien"];?>">
                                     <input type="text" hidden name="ville" value="<?php echo $i."/".$j;?>">
-                                    <input type="submit" value="<?php echo $villes->getVille($i,$j)->getNombrePonts()."/".$villes->getVille($i,$j)->getNombrePontsMax();?>" style="width: 40px; height: 40px;">
+                                    <input type="submit" value="<?php echo $villes->getVille($i,$j)->getNombrePontsMax();?>" style="width: 40px; height: 40px;">
                                 </form>
                                 </td>
                             <?php

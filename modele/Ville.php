@@ -41,17 +41,21 @@ $this->nombrePonts=$nb;
 
 //il faut ici implémenter les méthodes qui permettent de lier des villes entre elles, ...
 function addBridge($ville){
-    $this->villesLiees[$this->nombrePonts]=$ville;
+    if (!isset($this->villesLiees[$ville->getId()])){
+        $this->villesLiees[$ville->getId()]=0;
+    }
+    $this->villesLiees[$ville->getId()]+=1;
     $this->nombrePonts = $this->nombrePonts+1;
+}
+function delBridge($ville){
+    $this->villesLiees[$ville->getId()]-=2;
+    $this->nombrePonts = $this->nombrePonts-2;
 }
 
 function getNombrePVille($ville){
-    $res = 0;
-    for ($i=0;$i<$this->nombrePonts;$i++){
-        if ($this->villesLiees[$i]==$ville){
-            $res++;
-        }
+    if (!isset($this->villesLiees[$ville->getId()])){
+        $this->villesLiees[$ville->getId()]=0;
     }
-    return $res;
+    return $this->villesLiees[$ville->getId()];
 }
 }
