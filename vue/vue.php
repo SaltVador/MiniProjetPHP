@@ -49,7 +49,7 @@
                                     ?>
                                     <input type="text" hidden name="lien" value="<?php echo $_POST["lien"];?>">
                                     <input type="text" hidden name="ville" value="<?php echo $i."/".$j;?>">
-                                    <input type="submit" value="<?php echo $villes->getVille($i,$j)->getNombrePontsMax();?>" style="width: 40px; height: 40px;margin: 0px; padding: 0px;">
+                                    <input type="submit" value="<?php echo $villes->getVille($i,$j)->getNombrePontsMax();?>" style="width: 40px; height: 40px;margin: 0px; padding: 0px; cursor: pointer;">
                                 </form>
                                 </td>
                             <?php
@@ -69,7 +69,7 @@
                 </table>
                 </div>
         <form action="index.php" method="post" style="display: flex;justify-content: center">
-            <input type="submit" name="logout" value="Déconnexion" />
+            <input type="submit" name="logout" value="Déconnexion" style="cursor: pointer"/>
         </form>
 
 
@@ -127,13 +127,10 @@
 
     function bienvenue(){
  	    ?>
-        <html style="display: flex;justify-content: center; text-align: center">
-        Bienvenue <?php echo $_POST["pseudo"];?>
-        <br>
-        <form action="index.php">
+        <p style="text-align: center">Bienvenue <?php echo $_POST["pseudo"];?></p>
+        <form action="index.php" style="display: flex;justify-content: center">
             <input type="submit" value="OK" style="cursor: pointer">
         </form>
-        </html>
 <?php
     }
 
