@@ -32,7 +32,6 @@ class ControleurVilles
         if (isset($_POST["ville"])){
             $_POST["ville"] = "ville[]=".$_POST["ville"];
             $_POST["lien"] = $_POST["lien"].$_POST["ville"]."&";
-            echo $_POST["lien"]."<br>";
         }
 
 
@@ -41,18 +40,14 @@ class ControleurVilles
         if (isset($lien['ville'])){
 
             for ($e=1;$e<count($lien['ville']);$e=$e+2){
-                var_dump($e);
                 $ville1=$lien['ville'][$e-1];
-                var_dump($ville1);
                 $ville2=$lien['ville'][$e];
-                var_dump($ville2);
                 $ville1b = explode("/",$ville1);
                 $ville1i = $ville1b[0];
                 $ville1j = $ville1b[1];
                 $ville2b = explode("/",$ville2);
                 $ville2i = $ville2b[0];
                 $ville2j = $ville2b[1];
-                var_dump($ville2j);
                 if (($ville1i==$ville2i||$ville1j==$ville2j)&&$ville1!=$ville2){
                     $ville1 = $this->villes->getVille($ville1i,$ville1j);
                     $ville2 = $this->villes->getVille($ville2i,$ville2j);
@@ -109,8 +104,9 @@ class ControleurVilles
 
             }
         }
-        echo "<br>".$_POST["lien"]."<br>";
-        $this->maVue->jeu($this->villes, $ponts);
+        $resultat[0] = $this->villes;
+        $resultat[1] = $ponts;
+        return $resultat;
     }
 
     function rollback(){

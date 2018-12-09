@@ -123,4 +123,8 @@
         </html>
 <?php
     }
+
+    function gagne(){
+ 	    echo "Gagne";
+    }
  }

@@ -35,7 +35,8 @@ class Routeur {
         } else {
 	        if (isset($_SESSION["login"])){
 
-	            $this->ctrlVilles->init();
+	            $param = $this->ctrlVilles->init();
+	            $this->ctrlAffiche->affiche($param[0],$param[1]);
             } else{
                 $this->ctrlAuth->vueauth();
             }
