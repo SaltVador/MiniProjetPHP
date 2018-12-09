@@ -49,7 +49,7 @@
                                     ?>
                                     <input type="text" hidden name="lien" value="<?php echo $_POST["lien"];?>">
                                     <input type="text" hidden name="ville" value="<?php echo $i."/".$j;?>">
-                                    <input type="submit" value="<?php echo $villes->getVille($i,$j)->getNombrePontsMax();?>" style="width: 40px; height: 40px;margin: 0px; padding: 0px; cursor: pointer;">
+                                    <input type="submit" value="<?php echo $villes->getVille($i,$j)->getNombrePontsMax();?>" style="width: 40px; height: 40px;margin: 0px; padding: 0px; cursor: pointer;<?php if ($c==1&&!strcmp(substr($_POST["lien"],-4,3),$i."/".$j))echo "background-color: cornflowerblue;";?>">
                                 </form>
                                 </td>
                             <?php
