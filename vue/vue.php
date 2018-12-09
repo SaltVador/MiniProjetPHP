@@ -24,11 +24,11 @@
         <form action="index.php" method="post">
             <input type="text" hidden name="lien" value="<?php echo $_POST["lien"];?>">
             <input type="text" hidden name="rollB" value="rollb">
-            <input type="submit" value="Annuler"<?php if ($c == 1) echo "disabled";?>>
+            <input type="submit" value="Annuler"<?php if ($c == 1) {echo "disabled";}else{echo "style=\"cursor: pointer\"";}?>>
         </form>
         <form action="index.php" method="post">
             <input type="text" name="lien" value="" hidden>
-            <input type="submit" name="reset" value="reset">
+            <input type="submit" name="reset" value="reset" style="cursor: pointer">
         </form>
         </div>
         <div class="tab">
