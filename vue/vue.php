@@ -68,6 +68,11 @@
                 ?>
                 </table>
                 </div>
+        <?php
+        if (isset($_POST["fail"])){
+            echo "<p style='text-align: center'>Création impossible</p>";
+        }
+        ?>
         <form action="index.php" method="post" style="display: flex;justify-content: center">
             <input type="submit" name="logout" value="Déconnexion" style="cursor: pointer"/>
         </form>

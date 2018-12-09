@@ -93,47 +93,33 @@ public function deconnexion(){
         }
     }
 
-    function creerVilles(){
-      try{
-          for($i = 0; $i<7; $i++) {
-              for ($j = 0; $j < 7; $j++) {
-                  if ($this->villes->existe($i,$j)) {
-                      for ($x = 0; $x < 7; $x++) {
-                          if ($x != $j && $this->villes->existe($i,$x)) {
+    function creaP(){
+        try{
+            $statement = $this->connexion->prepare("INSERT INTO `parties` (`id`, `pseudo`, `partieGagnee`) VALUES (NULL, ?, '0')");
+            $pseudoParam=$_SESSION["login"];
+            $statement->bindParam(1, $pseudoParam);
+            $statement->execute();
 
-                              $statement = $this->connexion->prepare("insert into lienvilles values (?,?,?,0);");
-                              $statement->bindParam(1, $_SESSION["login"]);
-                              $ville1 = "".$i.$j;
-                              $statement->bindParam(2, $ville1);
-                              $ville2 = "".$i.$x;
+        }
+        catch(PDOException $e){
+            throw new TableAccesException("erreur création partie");
+        }
+    }
 
-                              $statement->bindParam(3, $ville2);
-                              $statement->execute();
+    function gagne(){
+        try{
+            $statement = $this->connexion->prepare("SELECT id FROM `parties` WHERE pseudo=?");
+            $pseudoParam=$_SESSION["login"];
+            $statement->bindParam(1, $pseudoParam);
+            $statement->execute();
+            while($ligne=$statement->fetch()){
+                $result[]=$ligne['id'];
+            }
+            $id=$result[count($result)-1];
+            $statement2 = $this->connexion->exec("UPDATE `parties` SET `partieGagnee` = '1' WHERE `parties`.`id` = ".$id);
+        }catch (PDOException $e){
 
-                          }
-                      }
-                      for ($y = 0; $y < 7; $y++) {
-                          if ($y != $i && $this->villes->existe($y,$j)) {
-
-                              $statement = $this->connexion->prepare("insert into lienvilles values (?,?,?,0);");
-                              $statement->bindParam(1, $_SESSION["login"]);
-                              $ville1 ="".$i.$j;
-                              $statement->bindParam(2, $ville1);
-                              $ville2 ="".$y.$j;
-                              $statement->bindParam(3, $ville2);
-                              $statement->execute();
-
-                          }
-                      }
-                  }
-              }
-          }
-      }
-
-
-      catch (PDOException $e){
-        throw new TableAccesException("ta mere");
-      }
+        }
     }
 
 

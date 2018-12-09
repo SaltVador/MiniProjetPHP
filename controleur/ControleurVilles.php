@@ -131,7 +131,7 @@ class ControleurVilles
     function rollback()
     {
         $_POST["lien"] = substr($_POST["lien"], 0, strlen($_POST["lien"]) - 24);
-        echo "Création impossible";
+        $_POST["fail"] = true;
     }
 
     function rollback2()

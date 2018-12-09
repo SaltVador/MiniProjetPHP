@@ -23,7 +23,7 @@ class Routeur {
 	}
 
 	public function routeurRequete()
-	{
+	{   if (isset($_POST["reset"]))$this->modele->creaP();
 	    if (isset($_POST["logout"])){
 	        session_destroy();
 	        $this->ctrlAffiche->deco();

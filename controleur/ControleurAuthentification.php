@@ -25,6 +25,7 @@ class ControleurAuthentification
     function verifCo(){
         if ($this->bd->exists()){
             $_SESSION["login"] = $_POST["pseudo"];
+            $this->bd->creaP();
             $this->maVue->bienvenue();
         } else {
             $_POST["coFail"] = true;
