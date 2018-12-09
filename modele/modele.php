@@ -116,13 +116,21 @@ public function deconnexion(){
                 $result[]=$ligne['id'];
             }
             $id=$result[count($result)-1];
-            $statement2 = $this->connexion->exec("UPDATE `parties` SET `partieGagnee` = '1' WHERE `parties`.`id` = ".$id);
+            $statement = $this->connexion->query("UPDATE `parties` SET `partieGagnee` = '1' WHERE `parties`.`id` = ".$id);
         }catch (PDOException $e){
 
         }
     }
 
-
+    function statFin(){
+        $statement = $this->connexion->query("SELECT COUNT(id) FROM `parties` WHERE pseudo=\"".$_SESSION["login"]."\" and partieGagnee=1");
+        $ligne=$statement->fetch();
+        $result[0]=$ligne['COUNT(id)'];
+        $statement = $this->connexion->query("SELECT COUNT(id) FROM `parties` WHERE pseudo=\"".$_SESSION["login"]."\"");
+        $ligne=$statement->fetch();
+        $result[1]=$ligne['COUNT(id)'];
+        return $result;
+    }
 }
 
 ?>

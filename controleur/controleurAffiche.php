@@ -37,7 +37,7 @@ class ControleurAffiche
             $this->maVue->jeu($villes,$ponts,$c);
         } else{
             $this->mod->gagne();
-            $this->maVue->gagne();
+            $this->maVue->gagne($this->mod->statFin());
         }
 
     }

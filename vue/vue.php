@@ -92,22 +92,10 @@
             <meta content="html/text">
             <link rel="stylesheet" type="text/css" href="vue.css" media="all"/>
         </head>
-        <body style="display: flex;justify-content: center;text-align: center">
+        <body>
 
-        <?php
-        if (isset($_POST["coFail"]) && $_POST["coFail"] == true){
-            echo "<p>Le pseudo et le mot de passe ne correspondent pas</p>";
-            echo "<br>";
-        }
-        if (isset($_POST["enreOK"]) && $_POST["enreOK"] == true){
-            echo "<p>Vous avez bien été enregistré</p>";
-            echo "<br>";
-        }if (isset($_POST["enreOK"]) && $_POST["enreOK"] == false){
-            echo "<p>Ce pseudo est déjà utilisé</p>";
-            echo "<br>";
-        }
-        ?>
 
+        <div style="display: flex;justify-content: center;text-align: center">
         <form action="index.php" method="post">
             Pseudo :<br>
             <input type="text" name="pseudo">
@@ -123,8 +111,21 @@
             <br>
             <br>
             <input type="submit" style="cursor: pointer">
+            <?php
+            if (isset($_POST["coFail"]) && $_POST["coFail"] == true){
+                echo "<p style='text-align: center'>Le pseudo et le mot de passe ne correspondent pas</p>";
+                echo "<br>";
+            }
+            if (isset($_POST["enreOK"]) && $_POST["enreOK"] == true){
+                echo "<p style='text-align: center'>Vous avez bien été enregistré</p>";
+                echo "<br>";
+            }if (isset($_POST["enreOK"]) && $_POST["enreOK"] == false){
+                echo "<p style='text-align: center'>Ce pseudo est déjà utilisé</p>";
+                echo "<br>";
+            }
+            ?>
         </form>
-
+        </div>
         </body>
         </html>
         <?php
@@ -139,9 +140,10 @@
 <?php
     }
 
-    function gagne(){
+    function gagne($stat){
  	    ?>
         <p style="text-align: center">Félicitation vous avez gagné</p>
+        Vous avez gagné <?php echo $stat[0]." parties sur ".$stat[1];?>
         <form action="index.php" method="post" style="display: flex;justify-content: center;">
             <input type="submit" name="logout" value="Déconnexion" style="cursor: pointer"/>
         </form>
