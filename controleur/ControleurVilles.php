@@ -56,7 +56,8 @@ class ControleurVilles
                     $ville2 = $this->villes->getVille($ville2i,$ville2j);
                     $pont = $this->villes->getVille($ville1i,$ville1j)->getNombrePVille($this->villes->getVille($ville2i,$ville2j));
                     if ($pont<2) {
-                        if ($this->noCollision($ville1i,$ville1j,$ville2i,$ville2j)){
+
+                        if ($this->noCollision($ville1i,$ville1j,$ville2i,$ville2j,$ponts)){
                             $this->villes->getVille($ville2i,$ville2j)->addBridge($ville1);
                             $this->villes->getVille($ville1i,$ville1j)->addBridge($ville2);
                         }else $this->rollback();
@@ -138,18 +139,18 @@ class ControleurVilles
         $_POST["lien"] = substr($_POST["lien"], 0, strlen($_POST["lien"]) - 24);
     }
 
-    function noCollision($ville1i,$ville1j,$ville2i,$ville2j){
+    function noCollision($ville1i,$ville1j,$ville2i,$ville2j,$pont){
         $verif=true;
         if ($ville2i==$ville1i){
             if ($ville1j>$ville2j){
                 for ($i = $ville2j+1;$i<$ville1j;$i++){
-                    if ($this->villes->existe($ville1i,$i)){
+                    if ($this->villes->existe($ville1i,$i)||strcmp($pont[$i][$ville1i],"|")==0||strcmp($pont[$i][$ville1i],"||")==0){
                         $verif= false;
                     }
                 }
             }else{
                 for ($i = $ville1j+1;$i<$ville2j;$i++){
-                    if ($this->villes->existe($ville2i,$i)){
+                    if ($this->villes->existe($ville2i,$i)||strcmp($pont[$i][$ville1i],"|")==0||strcmp($pont[$i][$ville1i],"||")==0){
                         $verif= false;
                     }
                 }
@@ -157,13 +158,13 @@ class ControleurVilles
         } else{
             if ($ville1i>$ville2i){
                 for ($i = $ville2i+1;$i<$ville1i;$i++){
-                    if ($this->villes->existe($i,$ville2j)){
+                    if ($this->villes->existe($i,$ville2j)||strcmp($pont[$ville2j][$i],"-")==0||strcmp($pont[$ville2j][$i],"=")==0){
                         $verif= false;
                     }
                 }
             }else{
                 for ($i = $ville1i+1;$i<$ville2i;$i++){
-                    if ($this->villes->existe($i,$ville2j)){
+                    if ($this->villes->existe($i,$ville2j)||strcmp($pont[$ville2j][$i],"-")==0||strcmp($pont[$ville2j][$i],"=")==0){
                         $verif= false;
                     }
                 }
