@@ -13,7 +13,7 @@ class ControleurAffiche
 
     }
 
-    function affiche($villes,$ponts){
+    function affiche($villes,$ponts,$c){
 
         for ($i=0;$i<7;$i++){
             for ($j=0;$j<7;$j++){
@@ -31,7 +31,7 @@ class ControleurAffiche
             }
         }
         if ($var==false){
-            $this->maVue->jeu($villes,$ponts);
+            $this->maVue->jeu($villes,$ponts,$c);
         } else{
             $this->maVue->gagne();
         }

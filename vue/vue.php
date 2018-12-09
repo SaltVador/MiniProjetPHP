@@ -6,7 +6,7 @@
 
 
  	
- 	function jeu($villes,$ponts)
+ 	function jeu($villes,$ponts,$c)
  	{	
 
  		
@@ -57,7 +57,16 @@
                 }
                 ?>
                 </table>
+                <form action="index.php" method="post">
+                    <input type="text" hidden name="lien" value="<?php echo $_POST["lien"];?>">
+                    <input type="text" hidden name="rollB" value="rollb">
+                    <input type="submit" value="Annuler le dernier lien créé"<?php if ($c == 1) echo "disabled";?>>
+                </form>
  			</div>
+        <form action="index.php" method="post">
+            <input type="text" name="lien" value="" hidden>
+            <input type="submit" name="reset" value="reset">
+        </form>
 
  		</body>
  		</html>

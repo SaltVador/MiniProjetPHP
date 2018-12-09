@@ -34,9 +34,9 @@ class Routeur {
             }
         } else {
 	        if (isset($_SESSION["login"])){
-
+                if (isset($_POST["rollB"]))$this->ctrlVilles->rollback2();
 	            $param = $this->ctrlVilles->init();
-	            $this->ctrlAffiche->affiche($param[0],$param[1]);
+	            $this->ctrlAffiche->affiche($param[0],$param[1],$param[2]);
             } else{
                 $this->ctrlAuth->vueauth();
             }

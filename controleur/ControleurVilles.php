@@ -36,10 +36,13 @@ class ControleurVilles
 
 
         if (!isset($_POST["lien"]))$_POST["lien"]="";
-        parse_str($_POST["lien"],$lien);
-        if (isset($lien['ville'])){
 
+        parse_str($_POST["lien"],$lien);
+        $count = 1;
+        if (isset($lien['ville'])){
+            $count = count($lien['ville'])%2;
             for ($e=1;$e<count($lien['ville']);$e=$e+2){
+
                 $ville1=$lien['ville'][$e-1];
                 $ville2=$lien['ville'][$e];
                 $ville1b = explode("/",$ville1);
@@ -52,7 +55,6 @@ class ControleurVilles
                     $ville1 = $this->villes->getVille($ville1i,$ville1j);
                     $ville2 = $this->villes->getVille($ville2i,$ville2j);
                     $pont = $this->villes->getVille($ville1i,$ville1j)->getNombrePVille($this->villes->getVille($ville2i,$ville2j));
-                    var_dump($pont);
                     if ($pont<2) {
                         if ($this->noCollision($ville1i,$ville1j,$ville2i,$ville2j)){
                             $this->villes->getVille($ville2i,$ville2j)->addBridge($ville1);
@@ -63,7 +65,6 @@ class ControleurVilles
                         $this->villes->getVille($ville1i,$ville1j)->delBridge($ville2);
                     }
                     $pont = $this->villes->getVille($ville1i,$ville1j)->getNombrePVille($this->villes->getVille($ville2i,$ville2j));
-                    var_dump($pont);
                     if ($ville2i==$ville1i){
                         if ($ville1j>$ville2j){
                             for ($i = $ville2j+1;$i<$ville1j;$i++){
@@ -122,11 +123,19 @@ class ControleurVilles
         }
         $resultat[0] = $this->villes;
         $resultat[1] = $ponts;
+        $resultat[2] = $count;
         return $resultat;
     }
 
-    function rollback(){
-        $_POST["lien"] = substr($_POST["lien"],0,strlen($_POST["lien"])-24);
+    function rollback()
+    {
+        $_POST["lien"] = substr($_POST["lien"], 0, strlen($_POST["lien"]) - 24);
+        echo "Création impossible";
+    }
+
+    function rollback2()
+    {
+        $_POST["lien"] = substr($_POST["lien"], 0, strlen($_POST["lien"]) - 24);
     }
 
     function noCollision($ville1i,$ville1j,$ville2i,$ville2j){
