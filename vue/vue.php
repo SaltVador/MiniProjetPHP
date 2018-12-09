@@ -149,6 +149,15 @@
         </form>
         <?php
     }
+     function perdu($stat){
+         ?>
+         <p style="text-align: center">Vous avez perdu</p>
+         Vous avez gagné <?php echo $stat[0]." parties sur ".$stat[1];?>
+         <form action="index.php" method="post" style="display: flex;justify-content: center;">
+             <input type="submit" name="logout" value="Déconnexion" style="cursor: pointer"/>
+         </form>
+         <?php
+     }
 
     function deco(){
  	    ?>

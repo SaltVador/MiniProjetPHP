@@ -40,7 +40,10 @@ class Routeur {
                 if (isset($_SESSION["login"])) {
                     if (isset($_POST["rollB"])) $this->ctrlVilles->rollback2();
                     $param = $this->ctrlVilles->init();
-                    $this->ctrlAffiche->affiche($param[0], $param[1], $param[2]);
+                    if ($param == false){
+                        $this->ctrlAffiche->perdu();
+                    } else $this->ctrlAffiche->affiche($param[0], $param[1], $param[2]);
+
                 } else {
                     $this->ctrlAuth->vueauth();
                 }

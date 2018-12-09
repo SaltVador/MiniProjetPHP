@@ -60,6 +60,9 @@ class ControleurVilles
                         if ($this->noCollision($ville1i,$ville1j,$ville2i,$ville2j,$ponts)){
                             $this->villes->getVille($ville2i,$ville2j)->addBridge($ville1);
                             $this->villes->getVille($ville1i,$ville1j)->addBridge($ville2);
+                            if ($this->villes->getVille($ville2i,$ville2j)->getNombrePonts()>$this->villes->getVille($ville2i,$ville2j)->getNombrePontsMax()||$this->villes->getVille($ville1i,$ville1j)->getNombrePonts()>$this->villes->getVille($ville1i,$ville1j)->getNombrePontsMax()){
+                                return false;
+                            }
                         }else $this->rollback();
                     }else {
                         $this->villes->getVille($ville2i,$ville2j)->delBridge($ville1);

@@ -44,6 +44,10 @@ class ControleurAffiche
     function deco(){
         $this->maVue->deco();
     }
+
+    function perdu(){
+        $this->maVue->perdu($this->mod->statFin());
+    }
 }
 
 
