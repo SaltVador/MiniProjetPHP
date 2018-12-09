@@ -37,6 +37,9 @@ class ControleurAffiche
         }
 
     }
+    function deco(){
+        $this->maVue->deco();
+    }
 }
 
 

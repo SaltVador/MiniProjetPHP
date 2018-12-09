@@ -24,21 +24,26 @@ class Routeur {
 
 	public function routeurRequete()
 	{
-	    if (isset($_POST["choixAuth"])){
-	        if ($_POST["choixAuth"] == "Enregistrement"){
-	            $this->ctrlAuth->enregistrement();
+	    if (isset($_POST["logout"])){
+	        session_destroy();
+	        $this->ctrlAffiche->deco();
+        }else {
+            if (isset($_POST["choixAuth"])) {
+                if ($_POST["choixAuth"] == "Enregistrement") {
+                    $this->ctrlAuth->enregistrement();
+                } else {
+
+                    $this->ctrlAuth->verifCo();
+
+                }
             } else {
-
-	            $this->ctrlAuth->verifCo();
-
-            }
-        } else {
-	        if (isset($_SESSION["login"])){
-                if (isset($_POST["rollB"]))$this->ctrlVilles->rollback2();
-	            $param = $this->ctrlVilles->init();
-	            $this->ctrlAffiche->affiche($param[0],$param[1],$param[2]);
-            } else{
-                $this->ctrlAuth->vueauth();
+                if (isset($_SESSION["login"])) {
+                    if (isset($_POST["rollB"])) $this->ctrlVilles->rollback2();
+                    $param = $this->ctrlVilles->init();
+                    $this->ctrlAffiche->affiche($param[0], $param[1], $param[2]);
+                } else {
+                    $this->ctrlAuth->vueauth();
+                }
             }
         }
 	}

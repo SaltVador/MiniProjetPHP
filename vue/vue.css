@@ -1,0 +1,10 @@
+.tab{
+    display: flex;
+    justify-content: center;
+}
+
+.bouton{
+    display: flex;
+    justify-content: center;
+
+}
