@@ -73,6 +73,8 @@
             echo "<p style='text-align: center'>Création impossible</p>";
         }
         ?>
+        <p style="position: fixed;top:20%;left:10%;width: 20%">Dessinez des ponts horizontaux ou verticaux pour relier toutes les villes. Les ponts peuvent être simples ou doubles; ils ne peuvent pas traverser; les villes doivent toutes être reliées les unes aux autres; le nombre dans chaque ville doit correspondre au nombre de ponts qui se terminent sur cette ville (les doubles ponts comptant pour deux). Notez que les boucles de ponts sont autorisées mais si vous dépassez le nombre de ponts autorisés par ville vous perdez </p>
+
         <form action="index.php" method="post" style="display: flex;justify-content: center">
             <input type="submit" name="logout" value="Déconnexion" style="cursor: pointer"/>
         </form>
